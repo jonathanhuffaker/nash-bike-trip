@@ -11,6 +11,7 @@ namespace nash_bike_trip.Controllers
         // GET: Trip
         public ActionResult Index()
         {
+            //return "This is my default action";
             return View();
         }
     }
