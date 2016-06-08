@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using nash_bike_trip.Models;
+using nash_bike_trip.DAL;
 
 namespace nash_bike_trip.Tests
 {
@@ -12,6 +13,24 @@ namespace nash_bike_trip.Tests
         {
             Trip t = new Trip();
             Assert.IsNotNull(t);
+        }
+
+        [TestMethod]
+        public void TripEnsureICanSaveATrip()
+        {
+            //Arrange
+            nash_bike_tripContext context = new nash_bike_tripContext("DefaultConnection");
+            Trip t = new Trip();
+
+            //Act
+            context.Trips.Add(t);
+            context.SaveChanges();
+
+            //Assert
+
+            Assert.AreEqual(1, context.Trips.Add(t));
+
+
         }
     }
 }
