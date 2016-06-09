@@ -19,7 +19,7 @@ namespace nash_bike_trip.Tests
         public void TripEnsureICanSaveATrip()
         {
             //Arrange
-            nash_bike_tripContext context = new nash_bike_tripContext("DefaultConnection");
+            nash_bike_tripContext context = new nash_bike_tripContext();
             Trip t = new Trip();
 
             //Act
