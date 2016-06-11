@@ -25,7 +25,7 @@ namespace nash_bike_trip.DAL
             return context.Trips.ToList<Trip>();
         }
 
-        public void AddTrip()
+        public void AddTrip(string DepartureTitle, string ArrivalTitle, DateTime TripDate, string TripNotes)
         {
             throw new NotImplementedException();
 
