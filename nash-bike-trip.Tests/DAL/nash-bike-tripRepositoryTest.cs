@@ -18,6 +18,7 @@ namespace nash_bike_trip.Tests.DAL
         Mock<nash_bike_tripContext> mock_context { get; set; }
         Mock<DbSet<Trip>> mock_trips_table { get; set; } //fake trips table
         nash_bike_tripRepository repo { get; set; }
+        IQueryable<Trip> data { get; set; }  //Turns List<Trip> into something we can query with Linq
 
 
         [TestInitialize]
@@ -28,7 +29,7 @@ namespace nash_bike_trip.Tests.DAL
             mock_trips_table = new Mock<DbSet<Trip>>(); //fake polls table
 
             repo = new nash_bike_tripRepository(mock_context.Object); // Injects mocked (fake) VotrContext
-
+            data = datasource.AsQueryable();
         }
 
         [TestCleanup]
@@ -39,6 +40,17 @@ namespace nash_bike_trip.Tests.DAL
 
         void ConnectMocksToDatastore() //Utility method
         {
+            var data = datasource.AsQueryable();
+
+
+            //Tell our fake Dbset to use our datasource like something Queryable
+            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.Expression).Returns(data.Expression);
+            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
+
+            //Tell our mocked nash_bike_tripRepositoryContex to use our fully mocked datasource (List<Trip>)
+            mock_context.Setup(m => m.Trips).Returns(mock_trips_table.Object);
 
         }
 
@@ -65,18 +77,8 @@ namespace nash_bike_trip.Tests.DAL
         [TestMethod]
         public void RepoEnsureThereAreNoTrips()
         {
-           
-            var data = datasource.AsQueryable();
 
-
-            //Tell our fake Dbset to use our datasource like something Queryable
-            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.Expression).Returns(data.Expression);
-            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
-
-            //Tell our mocked nash_bike_tripRepositoryContex to use our fully mocked datasource (List<Trip>)
-            mock_context.Setup(m => m.Trips).Returns(mock_trips_table.Object);
+            ConnectMocksToDatastore();
 
             //Act
             List<Trip> list_of_trips = repo.GetTrips();
