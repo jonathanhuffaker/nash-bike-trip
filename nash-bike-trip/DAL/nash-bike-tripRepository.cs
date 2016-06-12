@@ -33,8 +33,9 @@ namespace nash_bike_trip.DAL
 
         public void AddTrip(string DepartureTitle, string ArrivalTitle, DateTime TripDate, string TripNotes)
         {
-            throw new NotImplementedException();
-
+            Trip new_trip = new Trip { DepartureTitle = DepartureTitle, ArrivalTitle = ArrivalTitle, TripDate = TripDate, TripNotes = TripNotes };
+            context.Trips.Add(new_trip);
+            context.SaveChanges();
         }
     }
 }

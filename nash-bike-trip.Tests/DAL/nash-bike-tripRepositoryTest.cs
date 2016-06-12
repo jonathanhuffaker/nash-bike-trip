@@ -92,7 +92,9 @@ namespace nash_bike_trip.Tests.DAL
         [TestMethod]
         public void RepoEnsureTripCountIsZero()
         {
-            nash_bike_tripRepository repo = new nash_bike_tripRepository();
+            //nash_bike_tripRepository repo = new nash_bike_tripRepository();
+
+            ConnectMocksToDatastore();
 
             //Act
             int expected = 0;
@@ -106,7 +108,10 @@ namespace nash_bike_trip.Tests.DAL
         public void RepoEnsureICanAddTrip()
         {
 
-            nash_bike_tripRepository repo = new nash_bike_tripRepository();
+            ConnectMocksToDatastore();
+
+            //Hijack the call to the Trips.Add method and put it in the list using the list's Add method.
+            mock_trips_table.Setup(m => m.Add(It.IsAny<Trip>())).Callback((Trip trip) => datasource.Add(trip));
 
             //Act
             repo.AddTrip("515 Fairlane Drive, Nashville, TN 37210", "500 interstate blvd", DateTime.Now, "just adding a trip");
