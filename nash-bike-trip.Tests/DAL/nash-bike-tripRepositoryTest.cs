@@ -12,18 +12,35 @@ namespace nash_bike_trip.Tests.DAL
     [TestClass]
     public class nash_bike_tripRepositoryTest
     {
+
+        //Mocking
+        List<Trip> datasource { get; set; }
+        Mock<nash_bike_tripContext> mock_context { get; set; }
+        Mock<DbSet<Trip>> mock_trips_table { get; set; } //fake trips table
+        nash_bike_tripRepository repo { get; set; }
+
+
         [TestInitialize]
         public void Initialize()
         {
+            datasource = new List<Trip>();
+            mock_context = new Mock<nash_bike_tripContext>();
+            mock_trips_table = new Mock<DbSet<Trip>>(); //fake polls table
+
+            repo = new nash_bike_tripRepository(mock_context.Object); // Injects mocked (fake) VotrContext
 
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-
+            datasource = null;
         }
 
+        void ConnectMocksToDatastore() //Utility method
+        {
+
+        }
 
         [TestMethod]
         public void RepoEnsureICanCreateInstance()
@@ -36,7 +53,7 @@ namespace nash_bike_trip.Tests.DAL
         public void RepoEnsureIsUsingContext()
         {
             //Arrange
-            nash_bike_tripRepository repo = new nash_bike_tripRepository();
+            //nash_bike_tripRepository repo = new nash_bike_tripRepository();
 
             //Act
 
@@ -48,13 +65,7 @@ namespace nash_bike_trip.Tests.DAL
         [TestMethod]
         public void RepoEnsureThereAreNoTrips()
         {
-            //Mocking
-            List<Trip> datasource = new List<Trip> ();
-            Mock<nash_bike_tripContext> mock_context = new Mock<nash_bike_tripContext>();
-            Mock<DbSet<Trip>> mock_trips_table = new Mock<DbSet<Trip>>(); //fake trips table
-
-            //Arrange
-            nash_bike_tripRepository repo = new nash_bike_tripRepository(mock_context.Object);  //Injects a mocked (fake) nash_bike_tripContext
+           
             var data = datasource.AsQueryable();
 
 
