@@ -12,9 +12,15 @@ namespace nash_bike_trip.DAL
 
         public nash_bike_tripRepository()
         {
+            //instance of a context
+
             context = new nash_bike_tripContext();
         }
 
+        public nash_bike_tripRepository(nash_bike_tripContext _context)
+        {
+            context = _context;
+        }
         public int GetTripsCount()
         {
             return context.Trips.Count();

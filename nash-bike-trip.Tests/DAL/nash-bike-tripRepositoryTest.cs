@@ -3,12 +3,28 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using nash_bike_trip.DAL;
 using System.Collections.Generic;
 using nash_bike_trip.Models;
+using Moq;
+using System.Linq;
+using System.Data.Entity;
 
 namespace nash_bike_trip.Tests.DAL
 {
     [TestClass]
     public class nash_bike_tripRepositoryTest
     {
+        [TestInitialize]
+        public void Initialize()
+        {
+
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+
+        }
+
+
         [TestMethod]
         public void RepoEnsureICanCreateInstance()
         {
@@ -32,8 +48,24 @@ namespace nash_bike_trip.Tests.DAL
         [TestMethod]
         public void RepoEnsureThereAreNoTrips()
         {
+            //Mocking
+            List<Trip> datasource = new List<Trip> ();
+            Mock<nash_bike_tripContext> mock_context = new Mock<nash_bike_tripContext>();
+            Mock<DbSet<Trip>> mock_trips_table = new Mock<DbSet<Trip>>(); //fake trips table
+
             //Arrange
-            nash_bike_tripRepository repo = new nash_bike_tripRepository();
+            nash_bike_tripRepository repo = new nash_bike_tripRepository(mock_context.Object);  //Injects a mocked (fake) nash_bike_tripContext
+            var data = datasource.AsQueryable();
+
+
+            //Tell our fake Dbset to use our datasource like something Queryable
+            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.Expression).Returns(data.Expression);
+            mock_trips_table.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
+
+            //Tell our mocked nash_bike_tripRepositoryContex to use our fully mocked datasource (List<Trip>)
+            mock_context.Setup(m => m.Trips).Returns(mock_trips_table.Object);
 
             //Act
             List<Trip> list_of_trips = repo.GetTrips();

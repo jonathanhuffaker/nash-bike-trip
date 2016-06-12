@@ -13,7 +13,7 @@ namespace nash_bike_trip.DAL
         //{
         //    //base.DbContext
         //}
-        public DbSet<Trip> Trips { get; set; }
-        public DbSet<Option> Options { get; set; }
+        public virtual DbSet<Trip> Trips { get; set; }
+        public virtual DbSet<Option> Options { get; set; }
     }
 }
