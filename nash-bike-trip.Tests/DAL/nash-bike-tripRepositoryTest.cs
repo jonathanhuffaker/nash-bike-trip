@@ -122,5 +122,95 @@ namespace nash_bike_trip.Tests.DAL
             Assert.AreEqual(expected, actual);
 
         }
+
+        [TestMethod]
+        public void RepoEnsureICanNotFindOrNull()
+        {
+            //Arrange
+
+            Trip trip_in_db = new Trip { TripId = 1, DepartureTitle = "Some Title", ArrivalTitle = "Some place you are arriving", TripDate = DateTime.Now, TripNotes = " tripnote trip note note note trip"};
+            Trip trip_in_db_2 = new Trip { TripId = 2, DepartureTitle = "Some Title2", ArrivalTitle = "Second place you are arriving2", TripDate = DateTime.Now, TripNotes = " trip2note trip2 note2 note2 note2 trip2" };
+            datasource.Add(trip_in_db);
+            datasource.Add(trip_in_db_2);
+
+            datasource.Remove(trip_in_db_2);
+
+            ConnectMocksToDatastore();
+
+            //act
+            Trip found_trip = repo.GetTripOrNull(5);
+
+            //Assert
+            Assert.IsNull(found_trip);
+
+
+        }
+
+
+        //no longer need the below since i have "RepoEnsureICanNotFindOrNull" above
+        //[TestMethod]
+        //[ExpectedException(typeof(NotFoundException))]
+        //public void RepoEnsureICanNotFind()
+        //{
+        //    //Arrange
+        //    Trip trip_in_db = new Trip { TripId = 1, DepartureTitle = "Some Title", ArrivalTitle = "Some place you are arriving", TripDate = DateTime.Now, TripNotes = " tripnote trip note note note trip" };
+        //    Trip trip_in_db_2 = new Trip { TripId = 2, DepartureTitle = "Some Title2", ArrivalTitle = "Second place you are arriving2", TripDate = DateTime.Now, TripNotes = " trip2note trip2 note2 note2 note2 trip2" };
+        //    datasource.Add(trip_in_db);
+        //    datasource.Add(trip_in_db_2);
+
+        //    datasource.Remove(trip_in_db_2);
+
+        //    ConnectMocksToDatastore();
+
+        //    //Act
+        //    repo.GetTrip(5);
+
+        //}
+
+        [TestMethod]
+        public void RepoEnsureICanDeleteTrip()
+        {
+            //Arrange
+            Trip trip_in_db = new Trip { TripId = 1, DepartureTitle = "Some Title", ArrivalTitle = "Some place you are arriving", TripDate = DateTime.Now, TripNotes = " tripnote trip note note note trip" };
+            Trip trip_in_db_2 = new Trip { TripId = 2, DepartureTitle = "Some Title2", ArrivalTitle = "Second place you are arriving2", TripDate = DateTime.Now, TripNotes = " trip2note trip2 note2 note2 note2 trip2" };
+            datasource.Add(trip_in_db);
+            datasource.Add(trip_in_db_2);
+
+            ConnectMocksToDatastore();
+            mock_trips_table.Setup(m => m.Remove(It.IsAny<Trip>())).Callback((Trip trip) => datasource.Remove(trip));
+
+            //Act
+            repo.RemoveTrip(1);
+
+            //Assert
+            int expected_count = 1;
+            Assert.AreEqual(expected_count, repo.GetTripsCount());
+            //^check repo to see why i used "get trips" as opposed to "GetTrip"
+
+            try
+            {
+                repo.GetTrip(1);
+                Assert.Fail();
+            } catch (Exception) { }
+
+        }
+
+        [TestMethod]
+        public void RepoEnsureICanGetATrip()
+        {
+            Trip trip_in_db = new Trip { TripId = 1, DepartureTitle = "Some Title", ArrivalTitle = "Some place you are arriving", TripDate = DateTime.Now, TripNotes = " tripnote trip note note note trip" };
+            Trip trip_in_db_2 = new Trip { TripId = 2, DepartureTitle = "Some Title2", ArrivalTitle = "Second place you are arriving2", TripDate = DateTime.Now, TripNotes = " trip2note trip2 note2 note2 note2 trip2" };
+            datasource.Add(trip_in_db);
+            datasource.Add(trip_in_db_2);
+
+            ConnectMocksToDatastore();
+
+            //Act
+            Trip found_trip = repo.GetTrip(1);
+
+            //Assert 
+            Assert.IsNotNull(found_trip);
+            Assert.AreEqual(trip_in_db, found_trip);
+        }
     }
 }

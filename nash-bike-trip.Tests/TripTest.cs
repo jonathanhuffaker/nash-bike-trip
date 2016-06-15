@@ -15,22 +15,19 @@ namespace nash_bike_trip.Tests
             Assert.IsNotNull(t);
         }
 
-        [TestMethod]
-        public void TripEnsureICanSaveATrip()
-        {
-            //Arrange
-            nash_bike_tripContext context = new nash_bike_tripContext();
-            Trip t = new Trip();
+        //[TestMethod]
+        //public void TripEnsureICanSaveATrip()
+        //{
+        //    //Arrange
+        //    nash_bike_tripContext context = new nash_bike_tripContext();
+        //    Trip t = new Trip();
 
-            //Act
-            context.Trips.Add(t);
-            context.SaveChanges();
+        //    //Act
+        //    context.Trips.Add(t);
+        //    context.SaveChanges();
 
-            //Assert
-
-            Assert.AreEqual(1, context.Trips.Add(t));
-
-
-        }
+        //    //Assert
+        //    Assert.AreEqual(1, context.Trips.Add(t));
+        //}
     }
 }

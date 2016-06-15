@@ -9,6 +9,8 @@ namespace nash_bike_trip.DAL
     public class nash_bike_tripRepository
     {
         public nash_bike_tripContext context { get; set; }
+        //public IDbSet<ApplicationUser> Users { get}
+
 
         public nash_bike_tripRepository()
         {
@@ -36,6 +38,35 @@ namespace nash_bike_trip.DAL
             Trip new_trip = new Trip { DepartureTitle = DepartureTitle, ArrivalTitle = ArrivalTitle, TripDate = TripDate, TripNotes = TripNotes };
             context.Trips.Add(new_trip);
             context.SaveChanges();
+        }
+
+        public Trip GetTrip(int _trip_id)
+        {
+            Trip trip;
+
+            try
+            {
+                trip = context.Trips.First(i => i.TripId == _trip_id);
+
+            } catch (Exception)
+            {
+                throw new DllNotFoundException();
+            }
+
+            return trip; //ConnectMockstoDatastore made this possible
+        }
+
+        public void RemoveTrip(int _trip_id)
+        {
+            Trip some_trip = context.Trips.First(i => i.TripId == _trip_id);
+
+            context.Trips.Remove(some_trip);
+            context.SaveChanges();
+        }
+
+        public Trip GetTripOrNull(int _trip_id)
+        {
+            return context.Trips.FirstOrDefault(i => i.TripId == _trip_id);
         }
     }
 }

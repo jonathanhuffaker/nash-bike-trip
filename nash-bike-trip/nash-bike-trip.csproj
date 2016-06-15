@@ -200,6 +200,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\nash-bike-tripContext.cs" />
     <Compile Include="DAL\nash-bike-tripRepository.cs" />
+    <Compile Include="DAL\NotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
