@@ -7,7 +7,7 @@ using System.Web;
 
 namespace nash_bike_trip.DAL
 {
-    public class nash_bike_tripContext : DbContext
+    public class nash_bike_tripContext : ApplicationDbContext
     {
         //public nash_bike_tripContext(string connectionString)
         //{
