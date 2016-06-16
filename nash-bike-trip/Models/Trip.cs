@@ -23,6 +23,8 @@ namespace nash_bike_trip.Models
 
         public virtual ICollection<Option> Options { get; set;}
 
+        public virtual ApplicationUser CreatedBy { get; set; }
+
 
     }
 
