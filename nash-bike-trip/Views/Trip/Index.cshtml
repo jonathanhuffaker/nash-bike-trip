@@ -1,4 +1,4 @@
-﻿@{
+﻿@*@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,6 +8,63 @@
 
 <h2>Index</h2>
 
-<p>Hello From my view template</p>
+<p>Hello From my view template</p>*@
+@using System.Collections.Generic;
+@using nash_bike_trip.Models;
+@model IEnumerable<nash_bike_trip.Models.Trip>
 
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Departure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Arrival)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TripDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TripNotes)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TripDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TripNotes)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
 

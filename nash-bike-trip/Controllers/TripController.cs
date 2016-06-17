@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using nash_bike_trip.Models;
 
 namespace nash_bike_trip.Controllers
 {
@@ -14,8 +15,8 @@ namespace nash_bike_trip.Controllers
         // GET: Trip
         public ActionResult Index()
         {
-            ViewBag.Trips = Repo.GetTrips();
-            return View();
+           
+            return View(Repo.GetTrips());
 
         }
 
@@ -50,30 +51,40 @@ namespace nash_bike_trip.Controllers
         }
 
         //GET:  Trip/Edit/5
+        [Authorize]
         public  ActionResult Edit(int id)
         {
-            return View();
+            Trip found_trip = Repo.GetTripOrNull(id);
+            if (found_trip == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(found_trip);
         }
 
         //Post: Trip/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit([Bind(Include = "TripId, DepartureTitle, ArrivalTitle,TripDate,TripNotes")]Trip trip_to_edit)
         {
-            try
+           if (ModelState.IsValid)
+
             {
-                //TODO:  Add update logic here
-                return RedirectToAction("Index");
+
+                Repo.EditTrip(trip_to_edit);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         // GET: Trip/Delete/5
+        //[Authorize]
         public ActionResult Delete (int id)
         {
-            return View();
+            Trip found_trip = Repo.GetTripOrNull(id);
+            if (found_trip != null)
+            {
+                Repo.RemoveTrip(id);
+            }
+            return RedirectToAction("Index");
         }
 
         //POST: Trip/Delete/5

@@ -9,7 +9,7 @@ namespace nash_bike_trip.DAL
     public class nash_bike_tripRepository
     {
         public nash_bike_tripContext context { get; set; }
-        //public IDbSet<ApplicationUser> Users { get}
+        //public IDbSet<ApplicationUser> Users { get { return context.Users; } }
 
 
         public nash_bike_tripRepository()
@@ -67,6 +67,12 @@ namespace nash_bike_trip.DAL
         public Trip GetTripOrNull(int _trip_id)
         {
             return context.Trips.FirstOrDefault(i => i.TripId == _trip_id);
+        }
+
+        public void EditTrip(Trip trip_to_edit)
+        {
+            context.Entry(trip_to_edit).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
         }
     }
 }
