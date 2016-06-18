@@ -29,5 +29,7 @@ namespace nash_bike_trip.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<nash_bike_trip.Models.Trip> Trips { get; set; }
     }
 }

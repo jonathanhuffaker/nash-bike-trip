@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using nash_bike_trip.Models;
 
+
 namespace nash_bike_trip.Controllers
 {
     public class TripController : Controller
@@ -24,12 +25,20 @@ namespace nash_bike_trip.Controllers
 
         public ActionResult Details (int id)
         {
-            return View();
+            Trip found_trip = Repo.GetTripOrNull(id);
+            if (found_trip == null)
+            {
+                return RedirectToAction("Index");
+            } else
+            {
+                return View(found_trip);
+            }
         }
 
         //Get: Trip/Create
         public ActionResult Create()
         {
+            ViewBag.Error = false;
             return View();
         
         }
@@ -40,7 +49,10 @@ namespace nash_bike_trip.Controllers
         {
             try
             {
-                //TODO: Add insert logic here
+                string DepartureTitle = collection.Get("DepartureTitle");
+                string ArrivalTitle = collection.Get("ArrivalTitle");
+                string TripDate = collection.Get("TripDate");
+                string TripNotes = collection.Get("TripNotes");
 
                 return RedirectToAction("Index");
             }

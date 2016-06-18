@@ -29,10 +29,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Departure)
+            @Html.DisplayNameFor(model => model.DepartureTitle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Arrival)
+            @Html.DisplayNameFor(model => model.ArrivalTitle)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TripDate)
@@ -59,9 +59,9 @@
                 @Html.DisplayFor(modelItem => item.TripNotes)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.TripId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TripId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TripId })
             </td>
         </tr>
     }

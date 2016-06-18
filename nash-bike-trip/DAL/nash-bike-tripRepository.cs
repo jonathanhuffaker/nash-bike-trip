@@ -1,6 +1,7 @@
 ﻿using nash_bike_trip.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,7 @@ namespace nash_bike_trip.DAL
     public class nash_bike_tripRepository
     {
         public nash_bike_tripContext context { get; set; }
-        //public IDbSet<ApplicationUser> Users { get { return context.Users; } }
+        public IDbSet<ApplicationUser> Users { get { return context.Users; } }
 
 
         public nash_bike_tripRepository()
@@ -23,6 +24,12 @@ namespace nash_bike_trip.DAL
         {
             context = _context;
         }
+
+        public ApplicationUser GetUser(string user_id)
+        {
+            return context.Users.FirstOrDefault(i => i.Id == user_id);
+        }
+
         public int GetTripsCount()
         {
             return context.Trips.Count();
@@ -30,7 +37,7 @@ namespace nash_bike_trip.DAL
 
         public List<Trip> GetTrips()
         {
-            return context.Trips.ToList<Trip>();
+            return context.Trips.ToList();
         }
 
         public void AddTrip(string DepartureTitle, string ArrivalTitle, DateTime TripDate, string TripNotes)
@@ -50,7 +57,7 @@ namespace nash_bike_trip.DAL
 
             } catch (Exception)
             {
-                throw new DllNotFoundException();
+                throw new NotFoundException();
             }
 
             return trip; //ConnectMockstoDatastore made this possible
