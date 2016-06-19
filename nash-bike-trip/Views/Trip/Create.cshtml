@@ -59,6 +59,57 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        height: 100%;
+    }
+</style>
+
+
+    <h2> Nash Bike Trip</h2>
+
+    <form>
+        <label>Your Address: </label>
+        <input id="start" value="500 Interstate Blvd. Nashville, TN" type="text">
+        <label>Destination: </label>
+        <input id="end" value="617 Whispering Hills Drive, Nashville, TN 37211" type="text">
+        <input type="button" value="Update" onclick="calcRoute();">
+        <br />
+        <label>Start title: </label>
+        <input value="School" type="text">
+        <label>end title: </label>
+        <input value="Home" type="text">
+        <br />
+        <input type="button" value="Save trip for later">
+
+        <!-- ----note:  already have bike layer set so wont need the below - commenting out  -->
+        <!-- <button onclick="setLayer('Bicycling')">Bicycling Layer</button>  -->
+    </form>
+
+
+
+<div id="map" style="width: 520px; height: 400px"></div>
+
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0N9rm7_COzKRN-2OEYsJDpJwLTCjQQis&callback=initialize"
+            async defer></script>
+
+
+
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
 }
