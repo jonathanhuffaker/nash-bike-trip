@@ -64,6 +64,8 @@ function calcRoute() {
 
             //map.data.loadGeoJson('/BikeData/bike-rack.geojson');
             map.data.loadGeoJson('https://data.nashville.gov/resource/yjju-hypq.geojson');
+            //map.data.loadGeoJson('https://data.nashville.gov/resource/yjju-hypq.geojson?$$app-token=kWq8fKLZK1WORSOSKihs16jTU');
+
         }
     });
 }

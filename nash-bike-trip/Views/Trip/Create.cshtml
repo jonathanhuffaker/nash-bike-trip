@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Trip</h4>
+        <h4>Plan Your Trip</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -49,7 +49,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save Trip" class="btn btn-default" />
+                <input onclick="calcRoute();" value="Find Route Trip" class="btn btn-default" />
+
             </div>
         </div>
     </div>
@@ -74,7 +76,6 @@
 </style>
 
 
-    <h2> Nash Bike Trip</h2>
 
     <form>
         <label>Your Address: </label>
@@ -83,12 +84,12 @@
         <input id="end" value="617 Whispering Hills Drive, Nashville, TN 37211" type="text">
         <input type="button" value="Update" onclick="calcRoute();">
         <br />
-        <label>Start title: </label>
+        @*<label>Start title: </label>
         <input value="School" type="text">
         <label>end title: </label>
         <input value="Home" type="text">
         <br />
-        <input type="button" value="Save trip for later">
+        <input type="button" value="Save trip for later">*@
 
         <!-- ----note:  already have bike layer set so wont need the below - commenting out  -->
         <!-- <button onclick="setLayer('Bicycling')">Bicycling Layer</button>  -->
@@ -96,7 +97,7 @@
 
 
 
-<div id="map" style="width: 720px; height: 600px"></div>
+<div id="map" style="width: 900px; height: 600px"></div>
 
 
 
