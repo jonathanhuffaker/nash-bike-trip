@@ -96,4 +96,25 @@ function attachInstructionText(marker, text) {
     });
 }
 
+function postValsToDatabase() {
+    var tripDetails = {
+        DepartureTitle: $("#DepartureTitle").val(),
+        ArrivalTitle: $("#ArrivalTitle").val(),
+        TripDate: $("#TripDate").val(),
+        TripNotes: $("#TripNotes").val()
+    };
+ 
+
+    $.ajax({
+        type: "POST",
+        data: JSON.stringify(tripDetails),
+        url: "/api/TripsAPI",
+        contentType: "application/json"
+
+    }).fail(function (err) {
+        alert(err.message)
+    });
+    
+
+};
 
