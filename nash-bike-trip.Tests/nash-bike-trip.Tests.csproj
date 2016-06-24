@@ -65,6 +65,14 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=1.5.0.523, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.1.5.0.523\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>

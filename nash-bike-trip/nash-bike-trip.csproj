@@ -64,6 +64,14 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=1.5.0.523, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.1.5.0.523\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -273,9 +281,10 @@
     </Content>
     <Content Include="BikeData\bike-rack.geojson" />
     <None Include="Properties\PublishProfiles\nash-bike-trip20160621124208 - Web Deploy.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -335,7 +344,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606181603527_initialCreate.resx">
