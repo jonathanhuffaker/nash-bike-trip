@@ -213,26 +213,26 @@ namespace nash_bike_trip.Tests.DAL
             Assert.AreEqual(trip_in_db, found_trip);
         }
 
-        [TestMethod]
-        public void RepoEnsureICanEditPoll()
-        {
-            Trip trip_in_db = new Trip { TripId = 1, DepartureTitle = "Some Title", ArrivalTitle = "Some place you are arriving", TripDate = DateTime.Now, TripNotes = " tripnote trip note note note trip" };
-            Trip trip_in_db_2 = new Trip { TripId = 2, DepartureTitle = "Some Title2", ArrivalTitle = "Second place you are arriving2", TripDate = DateTime.Now, TripNotes = " trip2note trip2 note2 note2 note2 trip2" };
-            datasource.Add(trip_in_db);
-            datasource.Add(trip_in_db_2);
+        //[TestMethod]
+        //public void RepoEnsureICanEditTrip()
+        //{
+        //    Trip trip_in_db = new Trip { TripId = 1, DepartureTitle = "Some Title", ArrivalTitle = "Some place you are arriving", TripDate = DateTime.Now, TripNotes = " tripnote trip note note note trip" };
+        //    Trip trip_in_db_2 = new Trip { TripId = 2, DepartureTitle = "Some Title2", ArrivalTitle = "Second place you are arriving2", TripDate = DateTime.Now, TripNotes = " trip2note trip2 note2 note2 note2 trip2" };
+        //    datasource.Add(trip_in_db);
+        //    datasource.Add(trip_in_db_2);
 
-            ConnectMocksToDatastore();
+        //    ConnectMocksToDatastore();
 
             //Act
-            int trip_to_edit_id = 1;
-            Trip trip_to_edit = repo.GetTripOrNull(trip_to_edit_id); //happens when /Trip/Edit/1 is called
-            trip_to_edit.ArrivalTitle = "Changed";
+            //int trip_to_edit_id = 1;
+            //Trip trip_to_edit = repo.GetTripOrNull(trip_to_edit_id); //happens when /Trip/Edit/1 is called
+            //trip_to_edit.ArrivalTitle = "Changed";
 
-            repo.EditTrip(trip_to_edit);
+            //repo.EditTrip(trip_to_edit);
 
             //Assert
-            Trip edited_trip = repo.GetTripOrNull(trip_to_edit_id);
-            Assert.AreEqual(edited_trip.ArrivalTitle, "Changed");
-        }
+        //    Trip edited_trip = repo.GetTripOrNull(trip_to_edit_id);
+        //    Assert.AreEqual(edited_trip.ArrivalTitle, "Changed");
+        //}
     }
 }
