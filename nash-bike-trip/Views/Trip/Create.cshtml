@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Save a Trip</h2>
 
 
 @using (Html.BeginForm())
@@ -49,7 +49,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save Trip" class="btn btn-default" />
+                <input type="submit" onclick="postValsToDatabase()" value="Save Trip" class="btn btn-default" />
                 <input onclick="calcRoute();" value="Find Route Trip" class="btn btn-default" />
 
             </div>
@@ -75,13 +75,14 @@
     }
 </style>
 
+<h2>View A Route</h2>
 
 
     <form>
         <label>Your Address: </label>
-        <input id="start" value="500 Interstate Blvd. Nashville, TN" type="text">
+        <input id="start" placeholder="Enter Address:  Ex. 500 Interstate Blvd. Nashville, TN" type="text">
         <label>Destination: </label>
-        <input id="end" value="617 Whispering Hills Drive, Nashville, TN 37211" type="text">
+        <input id="end" placeholder="Enter Address:  Ex. 617 Whispering Hills Drive, Nashville, TN 37211" type="text">
         <input type="button" value="Update" onclick="calcRoute();">
         <br />
         @*<label>Start title: </label>
@@ -97,7 +98,7 @@
 
 
 
-<div id="map" style="width: 900px; height: 600px"></div>
+<div id="map" style="width: 900px; height: 540px"></div>
 
 
 
